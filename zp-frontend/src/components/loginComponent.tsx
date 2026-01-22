@@ -20,7 +20,7 @@ export default function LoginComponent() {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/login`,
         { username, password },
-        { withCredentials: true } // CRITICAL: This allows the browser to save the cookie
+        { withCredentials: true } 
       );
 
       const data = response.data;
