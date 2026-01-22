@@ -1,0 +1,97 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // Uses the pool (Transaction mode)
+  directUrl = env("DIRECT_URL")   // Uses direct connection (Session mode)
+}
+
+model Admin {
+  adminId    Int     @id @default(autoincrement())
+  username String  @unique
+  password  String
+}
+
+model AdminHistory {
+  id    Int   @id @default(autoincrement())
+  adminId   Int   @default(0)
+  action  String  @default("Unknown")
+  updatedAt DateTime @default(now())
+}
+
+model folders {
+  id    Int   @id @default(autoincrement())
+  title   String
+  slug    String
+  thumbnail_image    Json
+  event_date    DateTime
+  created_at    DateTime @default(now())
+}
+
+model gallery_images {
+  id          Int      @id @default(autoincrement())
+  folder_id   Int
+  fileId      String   @unique 
+  url         String 
+  height      Int?
+  width       Int?
+  uploaded_at DateTime @default(now())
+  @@index([folder_id])
+}
+
+model Blog {
+  id             Int      @id @default(autoincrement())
+  title          String   
+  description    String  
+  content        String   @db.Text
+  images         Json?    
+  isFeatured     Boolean  @default(false) 
+  createdAt      DateTime @default(now())
+  @@index([isFeatured])   
+  @@index([title])   
+}
+
+model Thanks {
+  id             Int      @id @default(autoincrement())
+  title          String   
+  description    String  
+  content        String   @db.Text
+  images         Json?    
+  isFeatured     Boolean  @default(false) 
+  createdAt      DateTime @default(now())
+  @@index([isFeatured])   
+  @@index([title])   
+}
+
+model Alumni {
+  id             Int      @id @default(autoincrement())
+  name           String   
+  designition    String  
+  instaUrl       String?  
+  xurl           String?    
+  email          String? 
+  linkedIn       String?   
+  @@index([name]) 
+}
+
+model Notices {
+  id             Int      @id @default(autoincrement())
+  title          String   
+  description    String   
+  expiry         DateTime @default(dbgenerated("NOW() + interval '1 day'"))
+  createdAt      DateTime @default(now())
+}
+
+model press_images {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  fileId      String   @unique 
+  url         String 
+  height      Int?
+  width       Int?
+  uploaded_at DateTime @default(now())
+}

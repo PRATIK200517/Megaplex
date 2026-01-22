@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const thanksController_1 = require("../controllers/thanksController");
+const authMiddlewears_1 = require("../middlewears/authMiddlewears");
+const thanksRouter = (0, express_1.Router)();
+thanksRouter.post("/addThanks", authMiddlewears_1.protect, thanksController_1.uploadThanks);
+thanksRouter.post("/deleteThanks", authMiddlewears_1.protect, thanksController_1.deleteThanks);
+thanksRouter.get("/thanks", thanksController_1.getThanks);
+thanksRouter.get("/thaks/:id", thanksController_1.getThanksbyId);
+exports.default = thanksRouter;
