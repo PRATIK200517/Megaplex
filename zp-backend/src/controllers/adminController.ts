@@ -42,7 +42,7 @@ export const registerAdmin = async (req: Request, res: Response) => {
                 username: username
             }
         });
-        
+
         if (userExists) {
             return res.status(400).json({ message: "User Already exists with this username. Please try with a different username" });
         }
@@ -91,7 +91,7 @@ export const loginAdmin = async (req: Request, res: Response) => {
                 username: username
             }
         });
-        
+
         if (!admin) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
@@ -104,9 +104,11 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV !== 'development',
+                secure: true, // Force true for production
                 sameSite: 'none',
-                maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days
+                partitioned: true, // Necessary for modern cross-site cookie handling
+                maxAge: 3 * 24 * 60 * 60 * 1000,
+                path: "/"
             });
 
             return res.status(200).json(
