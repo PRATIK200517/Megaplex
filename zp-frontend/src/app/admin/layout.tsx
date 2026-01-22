@@ -10,6 +10,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const token = cookieStore.get('jwt');
   let user= null;
   if (!token) {
+    console.log(token)
     redirect('/login');
   }
 
