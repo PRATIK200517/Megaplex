@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-slate-50">
       <h1 className="text-center text-3xl font-bold underline mb-8">
-        Megaplex
+        Megaplex Login 
       </h1>
 
       <Link href="/login">
