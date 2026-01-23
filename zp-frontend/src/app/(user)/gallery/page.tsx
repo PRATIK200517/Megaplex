@@ -28,7 +28,7 @@ interface ApiResponse {
 }
 
 async function getFolders(page: number, search: string, sort: string = 'newest'): Promise<ApiResponse> {
-  const baseUrl = 'http://localhost:5000/api/gallery/getFolders'; 
+  const baseUrl = `{process.env.NEXT_PUBLIC_SERVER_URL}/gallery/getFolder`'; 
   const query = new URLSearchParams({
     paginate: 'true',
     page: page.toString(),
