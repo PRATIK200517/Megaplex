@@ -20,7 +20,7 @@ interface Thank {
 // API Function
 async function getThankById(thankId: string): Promise<{ thank: Thank; message: string } | null> {
   try {
-    const res = await fetch(`http://localhost:5000/api/thanks/${thankId}`, {
+    const res = await fetch(`{process.env.NEXT_PUBLIC_SERVER_URL}/thanks/${thankId}`, {
       cache: 'no-store',
     });
 
