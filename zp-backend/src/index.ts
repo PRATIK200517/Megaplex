@@ -15,7 +15,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }));
-
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api", routes);
