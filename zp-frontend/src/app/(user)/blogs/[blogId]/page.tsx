@@ -20,7 +20,7 @@ interface Blog {
 // API Function
 async function getBlogById(blogId: string): Promise<{ blog: Blog; message: string } | null> {
   try {
-    const res = await fetch(`{process.env.NEXT_PUBLIC_SERVER_URL}/blogs/fetchBlog/${blogId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/fetchBlog/${blogId}`, {
       cache: 'no-store',
     });
 
