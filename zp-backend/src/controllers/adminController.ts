@@ -108,8 +108,7 @@ export const loginAdmin = async (req: Request, res: Response) => {
                 sameSite: 'none',
                 partitioned: true, 
                 maxAge: 3 * 24 * 60 * 60 * 1000,
-                path: "/",
-                domain: '.vercel.app'
+                path: "/"
             });
 
             return res.status(200).json(
