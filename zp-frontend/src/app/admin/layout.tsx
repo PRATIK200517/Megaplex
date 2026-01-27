@@ -7,6 +7,7 @@ import axios from 'axios';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
+  console.log(cookieStore.getAll());
   const token = cookieStore.get('jwt');
   console.log("Checking for token in AdminLayout...", token ? "FOUND" : "MISSING");
   let user = null;
