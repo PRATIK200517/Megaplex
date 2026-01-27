@@ -24,9 +24,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {
         headers: {
           'Cookie': `jwt=${token.value}`,
-          'Origin': 'https://megaplex.vercel.app',
-          'User-Agent': 'NextJS-Server-Component'
-        }
+          'Accept': 'application/json',
+        },
+        withCredentials: true
       }
     );
 
