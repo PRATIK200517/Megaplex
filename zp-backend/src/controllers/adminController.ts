@@ -104,9 +104,9 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: true, // Force true for production
+                secure: true, 
                 sameSite: 'none',
-                partitioned: true, // Necessary for modern cross-site cookie handling
+                partitioned: true, 
                 maxAge: 3 * 24 * 60 * 60 * 1000,
                 path: "/"
             });
