@@ -19,16 +19,31 @@ const deleteNoticeSchema = z.object({
 
 export const getNotices = async (req: Request, res: Response) => {
     try {
-        const notices = await prisma.notices.findMany();
+        const now = new Date();
+        const notices = await prisma.notices.findMany({
+            where: {
+                expiry: {
+                    gt: now
+                }
+            }
+        });
 
-        return res.status(200).json({ 
+        await prisma.notices.deleteMany({
+            where: {
+                expiry: {
+                    lt: now 
+                }
+            }
+        });
+
+        return res.status(200).json({
             notices: notices,
             message: "Notices retrieved successfully"
         });
-        
+
     } catch (error) {
-        console.error("Error retrieving notices:", error); 
-        return res.status(500).json({ 
+        console.error("Error retrieving notices:", error);
+        return res.status(500).json({
             message: "An unexpected server error occurred while retrieving notices."
         });
     }
@@ -52,7 +67,7 @@ export const uploadNotice = async (req: Request, res: Response) => {
             data: {
                 title: title,
                 description: description,
-                expiry: expiry, 
+                expiry: expiry,
             }
         });
 
@@ -71,17 +86,17 @@ export const deleteNotice = async (req: Request, res: Response) => {
     try {
         // Extract and validate the ID from route parameters
         const { id } = req.params;
-        
+
         // Create a validation object with the id
         const validation = deleteNoticeSchema.safeParse({ id });
 
         if (!validation.success) {
-            return res.status(400).json({ 
-                message: "Invalid notice ID", 
-                errors: validation.error.format() 
+            return res.status(400).json({
+                message: "Invalid notice ID",
+                errors: validation.error.format()
             });
         }
-        
+
         const noticeId = validation.data.id;
 
         // Check if notice exists
@@ -90,8 +105,8 @@ export const deleteNotice = async (req: Request, res: Response) => {
         });
 
         if (!notice) {
-            return res.status(404).json({ 
-                message: `Notice with ID ${noticeId} not found.` 
+            return res.status(404).json({
+                message: `Notice with ID ${noticeId} not found.`
             });
         }
 
@@ -100,18 +115,18 @@ export const deleteNotice = async (req: Request, res: Response) => {
             where: { id: noticeId }
         });
 
-        return res.status(200).json({ 
+        return res.status(200).json({
             message: "Notice deleted successfully",
             deletedNotice: {
                 id: notice.id,
                 title: notice.title
             }
         });
-        
+
     } catch (error) {
         console.error("Delete Notice Error:", error);
-        return res.status(500).json({ 
-            message: "An unexpected server error occurred during notice deletion." 
+        return res.status(500).json({
+            message: "An unexpected server error occurred during notice deletion."
         });
     }
 }

@@ -7,38 +7,43 @@ import axios from 'axios';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
-  console.log(cookieStore.getAll());
   const token = cookieStore.get('jwt');
-  console.log("Checking for token in AdminLayout...", token ? "FOUND" : "MISSING");
-  let user = null;
+
+  // 1. Initial local check (Fastest)
   if (!token) {
-    console.log(token)
     redirect('/login');
   }
 
+  let user = null;
   let isAuthenticated = false;
 
   try {
+    // 2. Server-to-Server Auth Check
+    // We use the full SERVER_URL here because relative paths (/api/main/...) 
+    // don't always resolve correctly inside Server Components unless 
+    // you provide the full origin.
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/isAuthorized`,
       {},
       {
         headers: {
+          // Manually passing the cookie from the browser's request to your backend
           'Cookie': `jwt=${token.value}`,
           'Accept': 'application/json',
-        },
-        withCredentials: true
+        }
       }
     );
 
     if (response.status === 200) {
       isAuthenticated = true;
-      user = response.data.user
+      user = response.data.user;
     }
   } catch (error: any) {
+    // This will now show up in your Vercel logs
     console.error("Backend Auth Check Failed:", error.response?.data || error.message);
   }
 
+  // 3. Final Protection
   if (!isAuthenticated) {
     redirect('/login');
   }

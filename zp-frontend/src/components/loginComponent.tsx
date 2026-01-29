@@ -10,24 +10,26 @@ export default function LoginComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const router=useRouter();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      setIsLoading(true);
+
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/admin/login`,
+        '/api/main/admin/login', // Use the proxy path, NOT the full Render URL
         { username, password },
-        { withCredentials: true } 
+        { withCredentials: true }
       );
 
-      const data = response.data;
       alert("Login successful!");
 
-      // 3. Redirect to Dashboard
-      router.push('/admin/');
+      // Force a refresh or use window.location if router.push feels 'stale' 
+      // with cookies, but router.push('/admin') is usually fine.
+      router.push('/admin');
 
     } catch (error: any) {
       console.error("Login Error:", error);
