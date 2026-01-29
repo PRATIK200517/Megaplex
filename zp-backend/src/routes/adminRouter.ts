@@ -19,7 +19,7 @@ adminRouter.post("/login",loginAdmin);
 
 adminRouter.post("/register",registerAdmin);
 
-adminRouter.post("/logout",protect,logoutAdmin);
+adminRouter.post("/logout",logoutAdmin);
 
 adminRouter.post("/delete",protect,deleteAdmin);
 
