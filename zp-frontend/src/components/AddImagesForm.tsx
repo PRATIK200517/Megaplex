@@ -44,7 +44,7 @@ export default function AddImagesForm() {
     useEffect(() => {
         const fetchFolders = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/getFolderNames`, {
+                const response = await axios.get(`/api/main/gallery/getFolderNames`, {
                     withCredentials: true,
                 });
                 setFolders(response.data.folders || []);
@@ -59,7 +59,7 @@ export default function AddImagesForm() {
     const authenticator = async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/upload-auth`,
+                `/api/main/upload-auth`,
                 {
                     withCredentials: true,
                 }
@@ -254,7 +254,7 @@ export default function AddImagesForm() {
             console.log('Sending payload to backend:', payload);
 
             const backendResponse = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/addImages`,
+                `/api/main/gallery/addImages`,
                 payload,  
                 {
                     withCredentials: true,

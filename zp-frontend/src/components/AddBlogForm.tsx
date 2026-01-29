@@ -40,7 +40,7 @@ export default function AddBlogForm() {
     const authenticator = useCallback(async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/upload-auth`,
+                `/api/main/upload-auth`,
                 {
                     withCredentials: true,
                 }
@@ -314,7 +314,7 @@ export default function AddBlogForm() {
 
             // 8. Send to backend
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/uploadBlog`,
+                `/api/main/blogs/uploadBlog`,
                 payload,
                 {
                     withCredentials: true,

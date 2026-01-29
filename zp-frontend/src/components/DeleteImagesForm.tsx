@@ -13,7 +13,7 @@ export default function DeleteImagesForm() {
     useEffect(() => {
         const fetchFolders = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/getFolderNames`, {
+                const response = await axios.get(`/api/main/gallery/getFolderNames`, {
                     withCredentials: true,
                 });
                 setFolders(response.data.folders || []);
@@ -38,7 +38,7 @@ export default function DeleteImagesForm() {
                 setSelectedImages([]); // Clear previous selection
                 
                 // Using POST as per your original logic, though GET is standard for fetching
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/${selectedFolderId}/getImages`,
+                const response = await axios.get(`/api/main/gallery/${selectedFolderId}/getImages`,
                     { withCredentials: true }
                 );
 
@@ -84,7 +84,7 @@ export default function DeleteImagesForm() {
         try {
             // Payload key "fileIds" matches your backend: const { fileIds } = req.body;
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/deleteImages`,
+                `/api/main/gallery/deleteImages`,
                 { fileIds: selectedImages }, 
                 { withCredentials: true }
             );

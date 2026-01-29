@@ -41,7 +41,7 @@ export default function DeleteBlogForm() {
 
             try {
                 const response = await axios.get(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/search`,
+                    `/api/main/blogs/search`,
                     {
                         params: { title: query },
                         withCredentials: true
@@ -113,7 +113,7 @@ export default function DeleteBlogForm() {
 
         try {
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/deleteBlog`,
+                `/api/main/blogs/deleteBlog`,
                 { blogId: selectedBlog.id.toString() },
                 {
                     withCredentials: true,

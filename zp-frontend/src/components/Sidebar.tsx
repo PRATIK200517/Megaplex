@@ -81,7 +81,7 @@ export default function Sidebar({username}:SiderbarProps) {
 
   const handleLogout = async () =>{
     try{
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/logout`,
+      const response = await axios.post(`/api/main/admin/logout`,
         {},
         {withCredentials:true}
       );

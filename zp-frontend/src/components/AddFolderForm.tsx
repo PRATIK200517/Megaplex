@@ -39,7 +39,7 @@ export default function AddFolderForm() {
 const authenticator = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/upload-auth`,
+      `/api/main/upload-auth`,
       {
         withCredentials: true, 
       }
@@ -189,7 +189,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     };
 
     const backendResponse = await axios.post(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/addFolder`,
+      `/api/main/gallery/addFolder`,
       payload,
       {
         withCredentials: true,

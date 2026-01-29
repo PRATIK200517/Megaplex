@@ -41,7 +41,7 @@ export default function DeleteThanksForm() {
 
             try {
                 const response = await axios.get(
-                    `${process.env.NEXT_PUBLIC_SERVER_URL}/thanks/search`,
+                    `/api/main/thanks/search`,
                     {
                         params: { title: query },
                         withCredentials: true
@@ -113,7 +113,7 @@ export default function DeleteThanksForm() {
 
         try {
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/thanks/deleteThanks/${selectedThanks.id}`,
+                `/api/main/thanks/deleteThanks/${selectedThanks.id}`,
                 {},
                 {
                     withCredentials: true,

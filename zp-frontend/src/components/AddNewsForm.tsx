@@ -45,7 +45,7 @@ export default function AddNewsForm() {
     const authenticator = useCallback(async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/upload-auth`,
+                `/api/main/upload-auth`,
                 {
                     withCredentials: true,
                     timeout: 10000
@@ -376,7 +376,7 @@ export default function AddNewsForm() {
             console.log('Sending payload to backend:', JSON.stringify(payload, null, 2));
 
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/news/addMedia`,
+                `/api/main/news/addMedia`,
                 payload,
                 {
                     withCredentials: true,

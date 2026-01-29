@@ -40,7 +40,7 @@ export default function DeleteNewsForm() {
         setError("")
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/news/media`,
+                `/api/main/news/media`,
                 {
                     withCredentials: true
                 }
@@ -156,7 +156,7 @@ export default function DeleteNewsForm() {
             }
 
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/news/deleteMedia`,
+                `/api/main/news/deleteMedia`,
                 payload,
                 {
                     withCredentials: true,

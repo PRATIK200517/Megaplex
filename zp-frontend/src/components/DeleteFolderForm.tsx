@@ -11,7 +11,7 @@ export default function DeleteFolderForm() {
     useEffect(() => {
         const fetchFolders = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/getFolderNames`, {
+                const response = await axios.get(`/api/main/gallery/getFolderNames`, {
                     withCredentials: true,
                 });
                 setFolders(response.data.folders || []);
@@ -31,7 +31,7 @@ export default function DeleteFolderForm() {
 
         setLoading(true);
         try {
-            await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_URL}/gallery/deleteFolder/${selectedFolderId}`, {
+            await axios.delete(`/api/main/gallery/deleteFolder/${selectedFolderId}`, {
                 withCredentials: true,
             });
             

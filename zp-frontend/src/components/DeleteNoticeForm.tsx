@@ -29,7 +29,7 @@ export default function DeleteNoticeForm() {
         setError("")
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/notices/getNotices`,
+                `/api/main/notices/getNotices`,
                 {
                     withCredentials: true
                 }
@@ -60,7 +60,7 @@ export default function DeleteNoticeForm() {
         try {
             // Delete notice - adjust endpoint based on your backend
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/notices/deleteNotice/${noticeId}`,
+                `/api/main/notices/deleteNotice/${noticeId}`,
                 {},
                 {
                     withCredentials: true,

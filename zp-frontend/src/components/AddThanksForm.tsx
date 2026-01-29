@@ -48,7 +48,7 @@ export default function AddThanksForm() {
     const authenticator = useCallback(async () => {
         try {
             const response = await axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/upload-auth`,
+                `/api/main/upload-auth`,
                 {
                     withCredentials: true,
                     timeout: 10000
@@ -379,7 +379,7 @@ export default function AddThanksForm() {
             console.log('Sending payload to backend:', payload);
 
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/thanks/addThanks`,
+                `/api/main/thanks/addThanks`,
                 payload,
                 {
                     withCredentials: true,

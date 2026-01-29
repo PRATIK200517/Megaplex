@@ -73,7 +73,7 @@ export default function AddNoticeForm() {
             console.log('Sending payload:', payload)
 
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/notices/AddNotice`,
+                `/api/main/notices/AddNotice`,
                 payload,
                 {
                     withCredentials: true,
