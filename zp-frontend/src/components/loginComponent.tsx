@@ -20,15 +20,13 @@ export default function LoginComponent() {
       setIsLoading(true);
 
       const response = await axios.post(
-        '/api/main/admin/login', // Use the proxy path, NOT the full Render URL
+        '/api/main/admin/login', 
         { username, password },
         { withCredentials: true }
       );
 
       alert("Login successful!");
 
-      // Force a refresh or use window.location if router.push feels 'stale' 
-      // with cookies, but router.push('/admin') is usually fine.
       router.push('/admin');
 
     } catch (error: any) {
@@ -40,8 +38,32 @@ export default function LoginComponent() {
     }
   };
 
+  const onClose = ()=>{
+    router.push('/');
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-50 to-blue-100 p-4">
+      <button
+      onClick={onClose}
+      className="fixed top-4 right-4 z-50 p-2 text-gray-500 hover:text-black hover:bg-gray-100 rounded-full transition-all"
+      aria-label="Close"
+    >
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2.5" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
       <div className="w-full max-w-md">
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">

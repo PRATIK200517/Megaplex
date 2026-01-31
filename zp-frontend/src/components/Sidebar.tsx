@@ -210,8 +210,8 @@ export default function Sidebar({username}:SiderbarProps) {
               <div className="flex-1 min-w-0">
                 <p className="font-medium truncate">{username || 'Admin'}</p>
               </div>
-              <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors">
-                <ArrowRightOnRectangleIcon className="w-5 h-5"  onClick={()=>{handleLogout()}}/>
+              <button className="p-2 hover:bg-gray-700 rounded-lg transition-colors" onClick={()=>{handleLogout()}}>
+                <ArrowRightOnRectangleIcon className="w-5 h-5"  />
               </button>
             </div>
           ) : (

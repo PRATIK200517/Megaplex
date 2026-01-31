@@ -104,9 +104,9 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: true, 
+                secure: true,
                 sameSite: 'none',
-                partitioned: true, 
+                partitioned: true,
                 maxAge: 3 * 24 * 60 * 60 * 1000,
                 path: "/"
             });
@@ -133,7 +133,11 @@ export const logoutAdmin = async (req: Request, res: Response) => {
     try {
         res.cookie('jwt', '', {
             httpOnly: true,
-            expires: new Date(0)
+            secure: true,
+            sameSite: 'none',
+            partitioned: true,
+            expires: new Date(0), 
+            path: '/'
         });
         return res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
